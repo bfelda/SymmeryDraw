@@ -11,16 +11,18 @@
 		<div class="art_container">
 			<section class="palet">
 				<div class="colors">
-					<div>
-						<input
-							type="number"
-							min="1"
-							max="100"
-							class="num"
-							value="5"
-							steps="2"
-						/>
-					</div>
+					<input type="file" hidden id="file_upload" />
+					<label for="file_upload" class="upload"
+						><span>&#128194;</span>
+					</label>
+					<input
+						type="number"
+						min="1"
+						max="100"
+						class="num"
+						value="5"
+						steps="2"
+					/>
 					<div class="color pink"></div>
 					<div class="color red"></div>
 					<div class="color orange"></div>
@@ -70,8 +72,8 @@
 
 		// Resizes the canvas to the available size of the window.
 		function resize() {
-			ctx.canvas.width = window.innerWidth;
-			ctx.canvas.height = window.innerHeight;
+			ctx.canvas.width = window.outerWidth - 20;
+			ctx.canvas.height = window.innerHeight - 140;
 		}
 
 		// Stores the initial position of the cursor
@@ -134,6 +136,21 @@
 
 		function changeSize(event) {
 			size = event.target.value;
+		}
+
+		var imageLoader = document.querySelector("#file_upload");
+		imageLoader.addEventListener("change", handleImage, false);
+
+		function handleImage(e) {
+			var reader = new FileReader();
+			reader.onload = function (event) {
+				var img = new Image();
+				img.onload = function () {
+					ctx.drawImage(img, 0, 0);
+				};
+				img.src = event.target.result;
+			};
+			reader.readAsDataURL(e.target.files[0]);
 		}
 	</script>
 </html>
