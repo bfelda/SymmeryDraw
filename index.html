@@ -51,6 +51,9 @@
 			document.addEventListener("mousedown", startPainting);
 			document.addEventListener("mouseup", stopPainting);
 			document.addEventListener("mousemove", sketch);
+			document.addEventListener("touchstart", startPainting);
+			document.addEventListener("touchend", stopPainting);
+			document.addEventListener("touchmove", sketch);
 			let colors = document.querySelectorAll(".color");
 			colors.forEach((element) => {
 				element.addEventListener("click", switchColor);
