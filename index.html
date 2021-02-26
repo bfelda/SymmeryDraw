@@ -90,8 +90,10 @@
 		// an event e is triggered to the coordinates where
 		// the said event is triggered.
 		function getPosition(event) {
-			coord.x = event.clientX - canvas.offsetLeft;
-			coord.y = event.clientY - canvas.offsetTop;
+			let clientx = event.clientX || event.touches[0].clientX;
+			let clienty = event.clientY || event.touches[0].clientY;
+			coord.x = clientx - canvas.offsetLeft;
+			coord.y = clienty - canvas.offsetTop;
 		}
 
 		// The following functions toggle the flag to start
